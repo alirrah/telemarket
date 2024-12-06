@@ -8,3 +8,27 @@
 html {
     font-size: 62.5%;
 }
+
+@font-face {
+    font-family: "Vazir";
+    src: url("src/assets/font/Vazirmatn-Regular.ttf") format("truetype"),
+    url("src/assets/font/Vazirmatn-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Vazir";
+    src: url("src/assets/font/Vazirmatn-Medium.ttf") format("truetype"),
+    url("src/assets/font/Vazirmatn-Regular.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Vazir";
+    src: url("src/assets/font/Vazirmatn-Bold.ttf") format("truetype"),
+    url("src/assets/font/Vazirmatn-Regular.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
