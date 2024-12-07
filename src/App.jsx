@@ -1,6 +1,7 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
 import Login from "./containers/Login/";
+import Dashboard from "./containers/Dashboard";
 import "./App.css";
 import {ConfigProvider} from "antd";
 
@@ -18,7 +19,7 @@ const App = () => {
 
                     {/* route need to be authenticated */}
                     <Route element={<ProtectedRoutes/>}>
-                        <Route path="/" exact element={<p>dashboard</p>}/>
+                        <Route path="/" exact element={<Dashboard/>}/>
                     </Route>
                 </Routes>
             </BrowserRouter>
