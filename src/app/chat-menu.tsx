@@ -1,6 +1,10 @@
 import { Avatar, Button, Flex, List, Typography } from "antd";
 
-const ChatMenu = ({ selected, setSelected, items }) => {
+const ChatMenu = ({ selected, setSelected, items }: {
+  selected: number,
+  setSelected: (number) => void,
+  items: { key: number, label: string }[]
+}) => {
   return (
     <List
       dataSource={items}

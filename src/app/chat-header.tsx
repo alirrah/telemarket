@@ -8,11 +8,11 @@ const popoverContent = (
   </Flex>
 );
 
-const ChatHeader = ({ selectedChat }) => {
+const ChatHeader = ({ selectedChat }: { selectedChat: { key: number, label: string } }) => {
   return (
     <Flex align="center" justify="space-between" style={{ height: "100%", padding: "1rem 1.5rem" }}>
       <Flex align="center" gap="small">
-        <Avatar shape="square" src="" alt="" style={{ minWidth: "3.2rem" }} />
+        <Avatar shape="square" src="" alt="" style={{ minWidth: "3.2rem" }}/>
         <Typography.Paragraph ellipsis={{
           rows: 1,
         }} style={{ color: "inherit", marginBottom: 0 }}>{selectedChat.label}</Typography.Paragraph>
