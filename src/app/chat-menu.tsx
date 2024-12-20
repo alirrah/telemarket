@@ -2,7 +2,7 @@ import { Avatar, Button, Flex, List, Typography } from "antd";
 
 const ChatMenu = ({ selected, setSelected, items }: {
   selected: number,
-  setSelected: (number) => void,
+  setSelected: (selected: number) => void,
   items: { key: number, label: string }[]
 }) => {
   return (
