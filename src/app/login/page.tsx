@@ -28,10 +28,10 @@ const Login = () => {
     }, 1000);
   };
 
-  const { token } = theme.useToken();
+  const { token: { colorBgLayout } } = theme.useToken();
 
   return (
-    <Content style={{ height: "100dvh", backgroundColor: token.colorBgLayout }}>
+    <Content style={{ height: "100dvh", backgroundColor: colorBgLayout }}>
       <Flex align="center" justify="center" style={{ height: "100%" }}>
         <Card>
           <Space size="large" direction="vertical">
