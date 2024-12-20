@@ -10,7 +10,7 @@ const popoverContent = (
 
 const ChatHeader = ({ selectedChat }) => {
   return (
-    <Flex align="center" justify="space-between" style={{ height: "100%", padding: "1rem 0.5rem 1rem 1.5rem" }}>
+    <Flex align="center" justify="space-between" style={{ height: "100%", padding: "1rem 1.5rem" }}>
       <Flex align="center" gap="small">
         <Avatar shape="square" src="" alt="" style={{ minWidth: "3.2rem" }} />
         <Typography.Paragraph ellipsis={{

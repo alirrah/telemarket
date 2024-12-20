@@ -137,7 +137,7 @@ const Dashboard = () => {
         ><ChatHeader selectedChat={items[selected]} /></Header>
         <Content
           style={{
-            margin: '1.6rem',
+            padding: '1.6rem',
           }}
         >
           <ChatContent />
