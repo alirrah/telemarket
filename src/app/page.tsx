@@ -126,7 +126,7 @@ const Dashboard = () => {
 
   return (
     <Layout style={{ height: '100dvh' }}>
-      <Sider theme="light"><ChatMenu selected={selected} setSelected={setSelected} items={items} /></Sider>
+      <Sider className="close-in-mobile" theme="light"><ChatMenu selected={selected} setSelected={setSelected} items={items} /></Sider>
       <Layout>
         <Header
           style={{

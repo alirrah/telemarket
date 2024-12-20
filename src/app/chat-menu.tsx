@@ -12,7 +12,7 @@ const ChatMenu = ({ selected, setSelected, items }) => {
                 }}>
           <Flex align="center" gap="small" style={{ width: "100%" }}>
             <Avatar shape="square" src="" alt="" style={{ minWidth: "3.2rem" }}/>
-            <Typography.Paragraph ellipsis={{
+            <Typography.Paragraph className="display-none-in-mobile" ellipsis={{
               rows: 1,
             }} style={{ color: "inherit", marginBottom: 0 }}>{item.label}</Typography.Paragraph>
           </Flex>
