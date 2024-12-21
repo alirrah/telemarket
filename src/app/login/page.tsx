@@ -10,8 +10,11 @@ import {
   Avatar,
   Space,
   Typography,
-  theme
+  theme,
+  Tabs,
 } from "antd";
+import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import type { TabsProps } from "antd";
 import { useState } from "react";
 
 const { Content } = Layout;
@@ -19,46 +22,62 @@ const { Title } = Typography;
 
 const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [tabKey, setTabKey] = useState("1");
 
   const onFinish = (values: { username: string; password: string }) => {
     setLoading(true);
-    console.log(values);
+    console.log({ tabKey: tabKey, ...values });
+
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   };
 
-  const { token: { colorBgLayout } } = theme.useToken();
+  const {
+    token: { colorBgLayout, colorTextDescription },
+  } = theme.useToken();
+
+  const items: TabsProps["items"] = [
+    {
+      key: "1",
+      label: "ورورد",
+    },
+    {
+      key: "2",
+      label: "ثبت‌نام",
+    },
+  ];
+
+  const onChange = (key: string) => {
+    setTabKey(key);
+  };
 
   return (
     <Content style={{ height: "100dvh", backgroundColor: colorBgLayout }}>
       <Flex align="center" justify="center" style={{ height: "100%" }}>
-        <Card>
+        <Card styles={{ body: { paddingInline: 0 } }}>
           <Space size="large" direction="vertical">
             <Flex align="center" vertical gap="middle">
               <Avatar size={64} src="" alt="tele market logo" />
+
               <Title level={5}>تل مارکت</Title>
             </Flex>
 
+            <Tabs
+              defaultActiveKey={tabKey}
+              centered
+              items={items}
+              onChange={onChange}
+            />
+
             <Form
-              name="basic"
-              labelCol={{
-                span: 8,
-              }}
-              wrapperCol={{
-                span: 16,
-              }}
               style={{
-                maxWidth: 600,
-              }}
-              initialValues={{
-                remember: true,
+                paddingInline: 24,
               }}
               onFinish={onFinish}
               autoComplete="off"
             >
               <Form.Item
-                label="ایمیل"
                 name="email"
                 rules={[
                   {
@@ -71,11 +90,15 @@ const Login = () => {
                   },
                 ]}
               >
-                <Input />
+                <Input
+                  placeholder="ایمیل"
+                  prefix={
+                    <MailOutlined style={{ color: colorTextDescription }} />
+                  }
+                />
               </Form.Item>
 
               <Form.Item
-                label="رمز عبور"
                 name="password"
                 rules={[
                   {
@@ -84,12 +107,20 @@ const Login = () => {
                   },
                 ]}
               >
-                <Input.Password />
+                <Input.Password
+                  placeholder="رمز عبور"
+                  prefix={
+                    <LockOutlined style={{ color: colorTextDescription }} />
+                  }
+                />
               </Form.Item>
-              <Form.Item label={null} style={{ margin: 0 }}>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                  ورورد
-                </Button>
+
+              <Form.Item style={{ margin: 0 }}>
+                <Flex justify="center">
+                  <Button type="primary" htmlType="submit" loading={loading}>
+                    ورورد
+                  </Button>
+                </Flex>
               </Form.Item>
             </Form>
           </Space>
