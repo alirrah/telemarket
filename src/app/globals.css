@@ -22,15 +22,25 @@ html {
   border-radius: 5px;
 }
 
+:where(.css-dev-only-do-not-override-uscbmb).ant-tabs
+  .ant-tabs-tab
+  + .ant-tabs-tab {
+  margin: 0 !important;
+}
+
+.ant-tabs-nav-list {
+  gap: 2rem !important;
+}
+
 @media only screen and (max-width: 768px) {
   .display-none-in-mobile {
     display: none;
   }
 
   .close-in-mobile {
-    flex: 0 0 65px!important;
-    max-width: 65px!important;
-    min-width: 65px!important;
-    width: 65px!important;
+    flex: 0 0 65px !important;
+    max-width: 65px !important;
+    min-width: 65px !important;
+    width: 65px !important;
   }
 }
