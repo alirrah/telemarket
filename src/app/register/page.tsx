@@ -19,7 +19,7 @@ import Link from "next/link";
 const { Content } = Layout;
 const { Title } = Typography;
 
-const Login = () => {
+const Register = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const {
@@ -90,10 +90,35 @@ const Login = () => {
                 />
               </Form.Item>
 
+              <Form.Item
+                name="confirm"
+                dependencies={["password"]}
+                rules={[
+                  { required: true, message: "لطفاً رمز عبور خود را تأیید کنید!" },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error("دو رمز عبوری که وارد کرده‌اید، مطابقت ندارند!")
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  placeholder="تاییدیه رمز عبور"
+                  prefix={
+                    <LockOutlined style={{ color: colorTextDescription }} />
+                  }
+                />
+              </Form.Item>
+
               <Form.Item style={{ margin: 0 }}>
                 <Flex justify="center">
                   <Button type="primary" htmlType="submit" loading={loading}>
-                    ورود
+                    ثبت نام
                   </Button>
                 </Flex>
               </Form.Item>
@@ -105,9 +130,9 @@ const Login = () => {
                 style={{ paddingTop: "2rem" }}
               >
                 <Typography.Paragraph style={{ margin: 0 }}>
-                  حساب کاربری ندارید؟
+                  از قبل حساب کاربری دارید؟
                 </Typography.Paragraph>
-                <Link href="/register">ثبت نام</Link>
+                <Link href="/login">ورود</Link>
               </Flex>
             </Form>
           </Space>
@@ -117,4 +142,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

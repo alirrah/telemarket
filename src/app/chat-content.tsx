@@ -1,4 +1,4 @@
-import { Card, Divider, List, Typography, Input, Flex } from "antd";
+import { Card, Divider, List, Typography, Flex } from "antd";
 
 const items = [
   {
@@ -55,8 +55,6 @@ const items = [
   },
 ];
 
-const { Search } = Input;
-
 const ChatContent = () => {
   return (
     <Flex vertical style={{height: "100%"}}>
@@ -72,9 +70,8 @@ const ChatContent = () => {
             <Divider style={{margin: "0.5rem 0", fontWeight: "normal", fontSize: "1.4rem"}} key={item.key}>{item.data}</Divider>
           );
         }}
-        style={{ flex: 1, overflowX: "auto", padding: "0.2rem 0" }}
+        style={{ width: "100%", overflowX: "auto", padding: "0.2rem 0" }}
       />
-      <Search placeholder="پیام" size="large" enterButton="ارسال"/>
     </Flex>
   );
 }

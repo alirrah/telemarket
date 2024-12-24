@@ -22,9 +22,7 @@ html {
   border-radius: 5px;
 }
 
-:where(.css-dev-only-do-not-override-uscbmb).ant-tabs
-  .ant-tabs-tab
-  + .ant-tabs-tab {
+.ant-tabs-tab {
   margin: 0 !important;
 }
 
