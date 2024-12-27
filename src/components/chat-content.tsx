@@ -5,34 +5,24 @@ import { redirect } from "next/navigation";
 
 const time = (str: string) => {
   const utcDate = new Date(str);
-
-  // منطقه زمانی کاربر
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  // تبدیل به زمان محلی
   const localDate = utcDate.toLocaleString("fa-IR", { timeZone: userTimezone });
-
-  // تقسیم تاریخ و زمان به بخش‌های جداگانه
   const [datePart, timePart] = localDate.split(", ");
-
-  // فرمت کردن تاریخ
   const [year, month, day] = datePart
     .split("/")
-    .map((part) => part.padStart(2, "0")); // اضافه کردن صفر در جلو اگر لازم باشد
-
-  // فرمت کردن زمان
+    .map((part) => part.padStart(2, "0"));
   const [hour, minutes, seconds] = timePart
     .split(":")
     .map((part) => part.padStart(2, "0"));
-
-  // ساخت رشته با فرمت مورد نظر
   const formattedDate = `${year}/${month}/${day} - ${hour}:${minutes}:${seconds}`;
 
   return formattedDate;
 };
 
 const ChatContent = (id: { id: number }) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<
+    { id: number; content: string; file: string; created_at: string }[]
+  >([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
