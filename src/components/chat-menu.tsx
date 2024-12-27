@@ -5,7 +5,7 @@ const ChatMenu = ({
   setSelected,
   items,
 }: {
-  selected: number;
+  selected: number | null;
   setSelected: (selected: number) => void;
   items: { id: number; image: string; name: string }[];
 }) => {
@@ -27,7 +27,7 @@ const ChatMenu = ({
           <Flex align="center" gap="small" style={{ width: "100%" }}>
             <Avatar
               shape="square"
-              src={item.image}
+              src={"https://alisadeqi.pythonanywhere.com" + item.image}
               alt=""
               style={{ minWidth: "3.2rem" }}
             />

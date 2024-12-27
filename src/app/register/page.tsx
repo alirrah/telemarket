@@ -51,7 +51,9 @@ const Register = () => {
         },
       )
       .then((res) => {
-        localStorage.setItem("token", JSON.stringify(res.data));
+        if (window !== undefined) {
+          window.localStorage.setItem("token", JSON.stringify(res.data));
+        }
         router.push("/");
       })
       .catch((err) => {

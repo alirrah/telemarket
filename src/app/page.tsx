@@ -1,40 +1,48 @@
 "use client";
 
-import { Layout, theme } from "antd";
+import { Layout, theme, Watermark } from "antd";
 import ChatContent from "@/components/chat-content";
 import ChatHeader from "@/components/chat-header";
 import ChatMenu from "@/components/chat-menu";
 import { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 const { Header, Content, Sider } = Layout;
 
 const Dashboard = () => {
-  const [selected, setSelected] = useState(1);
-  const [items, setItems] = useState([]);
-  const token = localStorage.getItem("token");
-  if (
-    !token ||
-    !(
-      JSON.parse(token).hasOwnProperty("access") &&
-      JSON.parse(token).hasOwnProperty("refresh")
-    )
-  ) {
-    localStorage.removeItem("token");
-    redirect("/login");
-  }
+  const [selected, setSelected] = useState<number | null>(null);
+  const [items, setItems] = useState<
+    { id: number; image: string; name: string }[]
+  >([]);
+  const router = useRouter();
 
   useEffect(() => {
-    axios
-      .get("https://alisadeqi.pythonanywhere.com/api/channel/detail", {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(token).access}`,
-        },
-      })
-      .then((res) => {
-        setItems(res.data);
-      });
+    let token: string | null = null;
+    if (window !== undefined) {
+      token = window.localStorage.getItem("token");
+    }
+    if (
+      !token ||
+      !(
+        JSON.parse(token).hasOwnProperty("access") &&
+        JSON.parse(token).hasOwnProperty("refresh")
+      )
+    ) {
+      window.localStorage.removeItem("token");
+      router.replace("/login");
+    } else {
+      axios
+        .get("https://alisadeqi.pythonanywhere.com/api/channel/detail", {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token).access}`,
+            "Cache-Control": "no-cache",
+          },
+        })
+        .then((res) => {
+          setItems(res.data);
+        });
+    }
   }, []);
 
   const {
@@ -54,15 +62,28 @@ const Dashboard = () => {
             height: "inherit",
           }}
         >
-          <ChatHeader selectedChat={items[selected]} />
+          <ChatHeader
+            selectedChat={
+              selected ? items.filter((item) => item.id === selected)[0] : null
+            }
+          />
         </Header>
-        <Content
-          style={{
-            padding: "1.6rem",
-          }}
+        <Watermark
+          content="Tele Market"
+          style={{ flex: 1 }}
+          gap={[50, 50]}
+          zIndex={0}
         >
-          <ChatContent id={selected} />
-        </Content>
+          <Content
+            style={{
+              padding: "1.6rem",
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            <ChatContent id={selected} />
+          </Content>
+        </Watermark>
       </Layout>
     </Layout>
   );

@@ -8,7 +8,7 @@ import { LogoutOutlined, MoreOutlined, UserOutlined } from "@ant-design/icons";
 const ChatHeader = ({
   selectedChat,
 }: {
-  selectedChat: { id: number; name: string; image: string };
+  selectedChat: { id: number; name: string; image: string } | null;
 }) => {
   const router = useRouter();
 
@@ -26,7 +26,7 @@ const ChatHeader = ({
         icon={<LogoutOutlined />}
         style={{ justifyContent: "flex-start" }}
         onClick={() => {
-          localStorage.removeItem("token");
+          window.localStorage.removeItem("token");
           router.replace("/login");
         }}
       >
@@ -35,8 +35,6 @@ const ChatHeader = ({
     </Flex>
   );
 
-  console.log(selectedChat);
-
   return (
     <Flex
       align="center"
@@ -44,20 +42,29 @@ const ChatHeader = ({
       style={{ height: "100%", padding: "1rem 1.5rem" }}
     >
       <Flex align="center" gap="small">
-        <Avatar
-          shape="square"
-          src={selectedChat?.image || ""}
-          alt=""
-          style={{ minWidth: "3.2rem" }}
-        />
-        <Typography.Paragraph
-          ellipsis={{
-            rows: 1,
-          }}
-          style={{ color: "inherit", marginBottom: 0 }}
-        >
-          {selectedChat?.name || ""}
-        </Typography.Paragraph>
+        {selectedChat ? (
+          <>
+            <Avatar
+              shape="square"
+              src={
+                "https://alisadeqi.pythonanywhere.com" + selectedChat.image ||
+                ""
+              }
+              alt=""
+              style={{ minWidth: "3.2rem" }}
+            />
+            <Typography.Paragraph
+              ellipsis={{
+                rows: 1,
+              }}
+              style={{ color: "inherit", marginBottom: 0 }}
+            >
+              {selectedChat.name || ""}
+            </Typography.Paragraph>
+          </>
+        ) : (
+          <div></div>
+        )}
       </Flex>
 
       <Popover content={popoverContent} placement="bottomLeft" trigger="click">
