@@ -79,6 +79,8 @@ const Dashboard = () => {
               padding: "1.6rem",
               position: "relative",
               zIndex: 1,
+              height: "100%",
+              overflow: "auto"
             }}
           >
             <ChatContent id={selected} />

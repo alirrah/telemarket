@@ -10,10 +10,10 @@ const time = (str: string) => {
   const [datePart, timePart] = localDate.split(", ");
   const [year, month, day] = datePart
     .split("/")
-    .map((part) => part.padStart(2, "0"));
+    .map((part) => part.padStart(2, "۰"));
   const [hour, minutes, seconds] = timePart
     .split(":")
-    .map((part) => part.padStart(2, "0"));
+    .map((part) => part.padStart(2, "۰"));
   return `${hour}:${minutes}:${seconds} - ${year}/${month}/${day}`;
 };
 
@@ -70,6 +70,7 @@ const ChatContent = ({ id }: { id: number | null }) => {
                 <Image
                   src={"https://alisadeqi.pythonanywhere.com" + item.file}
                   alt=""
+                  style={{borderRadius: 5}}
                 />
                 <div style={{ blockSize: "1rem" }}></div>
                 <Typography.Paragraph
@@ -92,8 +93,6 @@ const ChatContent = ({ id }: { id: number | null }) => {
             );
           }}
           style={{
-            width: "100%",
-            overflowX: "auto",
             padding: "0.2rem 0",
             maxWidth: "60rem",
           }}
